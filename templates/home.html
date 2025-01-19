@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage - Fakegram</title>
+  <style>
+    h2 {
+      text-align: center;
+      font-family: 'Pacifico', cursive;
+      font-size: 48px;
+      color: #E1306C; /* Colore simile al tema Instagram */
+    }
+    /* Reset di base */
+    body, html {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px;
+      height: 100vh; /* Altezza piena dello schermo */
+    }
+
+    /* Colonna generica */
+    .column {
+      padding: 45px;
+    }
+
+    /* Colonna sinistra */
+    .column.left {
+      flex: 1; /* Adatta questa colonna in modo flessibile */
+      background-color: #f0f0f0;
+      display: none; /* Nasconde la colonna sinistra di default */
+    }
+
+    /* Colonna centrale */
+    .column.center {
+      flex: 3; /* Colonna principale più ampia */
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Colonna destra */
+    .column.right {
+      flex: 1;
+      background-color: #f9f9f9;
+      display: none; /* Nasconde la colonna destra di default */
+    }
+
+    /* Media query per schermi più grandi */
+    @media (min-width: 768px) {
+      .column.left, .column.right {
+        display: block; /* Mostra le colonne laterali */
+      }
+    }
+
+    /* Bottone di logout */
+    .logout-button {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #E1306C;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Colonna sinistra -->
+    <!-- Colonna sinistra nascosta (puoi attivarla quando necessario) -->
+
+    <!-- Colonna centrale -->
+    <div class="column center">
+      <h2>Fakegram</h2>
+      {% if user %}
+        <p>Benvenuto, {{ user['username'] }}!</p>
+        <div style="text-align: center; margin-top: 20px;">
+          <a href="{{ url_for('create_post') }}" class="btn btn-primary">Crea un nuovo post</a>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+          <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+        </div>
+      {% else %}
+        <p style="text-align: center;">
+          <a href="{{ url_for('login') }}" class="btn btn-primary">Accedi</a> o 
+          <a href="{{ url_for('register') }}" class="btn btn-primary">Registrati</a>
+        </p>
+      {% endif %}
+
+      <h3>Post recenti:</h3>
+      {% for post in posts %}
+        <div class="post" style="margin-bottom: 20px;">
+          <h5>{{ post.author }}</h5>
+          <p>{{ post.content }}</p>
+          {% if post.image_url %}
+            <img src="{{ post.image_url }}" alt="Image" style="width: 100%; max-width: 400px;">
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Colonna destra -->
+    <!-- Colonna destra nascosta (puoi attivarla quando necessario) -->
+  </div>
+</body>
+</html>
