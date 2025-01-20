@@ -101,13 +101,13 @@ def register():
 @app.route('/create_post', methods=['GET', 'POST'])
 def create_post():
     if 'user_email' not in session:
-        return redirect(url_for('login'))  # Se l'utente non è loggato, lo redirigi alla pagina di login
+        return redirect(url_for('login'))  #se l'utente non è loggato, lo redirigi alla pagina di login
 
     if request.method == 'POST':
         author = request.form['author']
         content = request.form['content']
 
-        # Gestione dell'immagine
+        #gestione dell'immagine
         image_url = None
         if 'image' in request.files:
             image = request.files['image']
@@ -117,7 +117,7 @@ def create_post():
                 image.save(image_path)
                 image_url = f'/static/images/{filename}'
 
-        # Aggiungi il nuovo post
+        #aggiungi il nuovo post
         posts = load_data(POSTS_FILE)
         new_post = {
             'author': author,
