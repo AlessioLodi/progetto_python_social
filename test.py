@@ -47,8 +47,7 @@ def index():
 def get_users(): #funzione eseguita quando un utente accede all'URL /users
     with open('./db/users.json', 'r') as file: #apro il json in modalita di lettura ('r')
         data = json.load(file) #leggo il contenuto del json e lo trasformo in una lista/dizionario, poi lo immagazzino nella var. data
-
-   userList = [] #lista vuota per gli user 
+        userList = [] #lista vuota per gli user 
     
     # Cycle over each JSON object and create a new User object
     for jsonFile in data: #scorre ogni oggeto nel file json
@@ -56,6 +55,10 @@ def get_users(): #funzione eseguita quando un utente accede all'URL /users
         userList.append(user) #metto lo user nella lista precedentemente creata
     
     return render_template('users.html', users=userList) #passo la lista di utenti al template users.html
+
+@app.route('/register', methods=['GET'])
+def register():
+    return render_template('register.html')
 
 # Add user to file
 # Path: POST /new
@@ -93,6 +96,3 @@ def add_user(): #funzione per aggiungere un nuovo user
     
     return redirect('/users')
 
-@app.route('/register', methods=['GET'])
-def register():
-    return render_template('register.html')
