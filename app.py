@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import json
 import os
-from werkzeug.utils import secure_filename
-from werkzeug.security import generate_password_hash, check_password_hash
+#from werkzeug.utils import secure_filename
+#from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
