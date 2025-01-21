@@ -24,10 +24,10 @@ class User:
     def getLastName(self):
         return self.LastName
     
-    def getBirthday(self):
+    def getEmail(self):
         return self.Email
     
-    def getNationality(self):
+    def getPassword(self):
         return self.Password
 
 #ogni volta che apro la home verrò loggato come 'Alessio Lodi Rizzini'
@@ -58,11 +58,11 @@ def get_users(): #funzione eseguita quando un utente accede all'URL /users
 
 @app.route('/register', methods=['GET'])
 def register():
-    return render_template('register.html')
+    return render_template('register.html')  #mostra il form di registrazione
 
 # Add user to file
 # Path: POST /new
-@app.route('/register', methods=['POST'])#quando apro la pagina login
+@app.route('/register/create_post', methods=['POST'])#quando apro la pagina login
 def add_user(): #funzione per aggiungere un nuovo user
     # Open user file
     with open('./db/users.json', 'r') as file: #apro il file yser in modalità lettura
@@ -86,13 +86,17 @@ def add_user(): #funzione per aggiungere un nuovo user
         "FirstName": first_name,
         "LastName": last_name,
         "Email": email,
-        "Password": Password
+        "Password": password
     }
     
     data.append(newUser)
     
     with open('./db/users.json', 'w') as outfile:
-    json.dump(data, outfile, indent=4)
+        json.dump(data, outfile, indent=4)
     
     return redirect('/users')
+
+@app.route('/login', methods=['GET'])
+def login():
+    return render_template('login.html')
 
