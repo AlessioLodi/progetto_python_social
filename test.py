@@ -96,3 +96,57 @@ def add_user(): #funzione per aggiungere un nuovo user
     
     return redirect('/users')
 
+
+
+
+
+
+
+
+
+
+@app.route('/create_post', methods=['GET', 'POST'])
+def create_post():
+    user_email = request.cookies.get('user_email')  #Ottieni l'email dell'utente loggato
+    user = None
+
+    if user_email and os.path.exists(users.json):  #Controlla se l'email esiste e il file è presente (Verifica se l'utente è loggato leggendo il file JSON degli utenti)
+        users = load_json(users.json)  #Carica tutti gli utenti dal file
+        user = None
+        for u in users:
+            if u['Email'] == user_email:
+            users = u
+            break
+ 
+    if not user:
+        return redirect('/login') #Reindirizza al login (se l'utente non è loggato)
+
+    if request.method == 'POST': #Se la richiesta è POST, crea un nuovo post
+        author = user['FirstName'] + ' ' + user['LastName']  #Recupera il nome completo dell'autore
+        content = request.form['content']  #Contenuto del post inserito dall'utente
+        image_url = None  #Inizializza il percorso dell'immagine come vuoto
+
+        if 'image' in request.files:  # Verifica se il campo immagine è stato inviato (vado a controllare se un'immagine è stata caricata)
+            image = request.files['image']
+            if '.' in image.filename and image.filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+                # Salva l'immagine nella cartella specificata
+                os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Crea la cartella se non esiste
+                image_path = os.path.join(UPLOAD_FOLDER, image.filename)  # Percorso completo per salvare l'immagine
+                image.save(image_path)  # Salva il file
+                image_url = f'/static/images/{image.filename}'  # Salva il percorso dell'immagine
+
+        # Passo 6: Leggi i post esistenti dal file JSON
+        posts = load_json(posts.json)
+
+        # Passo 7: Aggiungi il nuovo post all'elenco
+        posts.append({'author': author, 'content': content, 'image_url': image_url})
+
+        # Passo 8: Salva i post aggiornati nel file JSON
+        save_json(POSTS_FILE, posts)
+
+        # Passo 9: Reindirizza alla home page
+        return redirect('/')
+
+    # Passo 10: Se la richiesta è GET, mostra il modulo per creare un post
+    return render_template('create_post.html')
+
