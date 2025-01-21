@@ -99,6 +99,3 @@ def add_user(): #funzione per aggiungere un nuovo user
 @app.route('/login', methods=['GET'])
 def login():
     return render_template('login.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
