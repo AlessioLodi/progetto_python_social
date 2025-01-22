@@ -24,10 +24,10 @@ class User:
     def getLastName(self):
         return self.LastName
     
-    def getBirthday(self):
+    def getEmail(self):
         return self.Email
     
-    def getNationality(self):
+    def getPassword(self):
         return self.Password
 
 #ogni volta che apro la home verrò loggato come 'Alessio Lodi Rizzini'
@@ -58,11 +58,11 @@ def get_users(): #funzione eseguita quando un utente accede all'URL /users
 
 @app.route('/register', methods=['GET'])
 def register():
-    return render_template('register.html')
+    return render_template('register.html')  #mostra il form di registrazione
 
 # Add user to file
 # Path: POST /new
-@app.route('/register', methods=['POST'])#quando apro la pagina login
+@app.route('/register/create_post', methods=['POST'])#quando apro la pagina login
 def add_user(): #funzione per aggiungere un nuovo user
     # Open user file
     with open('./db/users.json', 'r') as file: #apro il file yser in modalità lettura
@@ -86,67 +86,49 @@ def add_user(): #funzione per aggiungere un nuovo user
         "FirstName": first_name,
         "LastName": last_name,
         "Email": email,
-        "Password": Password
+        "Password": password
     }
     
     data.append(newUser)
     
     with open('./db/users.json', 'w') as outfile:
-    json.dump(data, outfile, indent=4)
+        json.dump(data, outfile, indent=4)
     
     return redirect('/users')
 
 
 
+###CREAZIONE ED EVENTUALE CANCELLAZIONE DEI POST
 
+@app.route('/posts', methods=['GET', 'POST'])
+def create_posts(): #funzione per creare i post
+    user_email = request.cookies.get('user_email') #per ottenere la mail dell'utente loggato tramite i cookie del brawser
+    user = None #inizializzo la variabile user come vuota prima di cercare l'utente loggato.
 
+    with open('./db/users.json', 'r') as file:  #leggo il file json per verificare che l'utente sia loggato
+        users = json.load(file) #carico il file letto in users
+         
+        #per ogni elemento in users, assegna temporaneamente quel singolo elemento alla variabile u
+        for u in users: #cicla attraverso tutti gli utenti (u=variabile temporanea che rappresenta ogni elemento della lista users[la lista sarebbe users.json])
+            if u['Email'] == user_email: #controllo se l'email corrisponde all'utente loggato
+               user = u #salvo l'utente trovato
+               break #interrompo il ciclo una volta trovato l'utente
+               
 
-
-
-
-
-@app.route('/create_post', methods=['GET', 'POST'])
-def create_post():
-    user_email = request.cookies.get('user_email')  #Ottieni l'email dell'utente loggato
-    user = None
-
-    if user_email and os.path.exists(users.json):  #Controlla se l'email esiste e il file è presente (Verifica se l'utente è loggato leggendo il file JSON degli utenti)
-        users = load_json(users.json)  #Carica tutti gli utenti dal file
-        user = None
-        for u in users:
-            if u['Email'] == user_email:
-            users = u
-            break
- 
     if not user:
-        return redirect('/login') #Reindirizza al login (se l'utente non è loggato)
+       return redirect('/login') #se non c'è nessun utente loggato reindirizza al login
+    
+    #gestione della richiesta post (aggiungo un nuovo post)
+    if request.method == 'POST':
+       content = request.form['content'] #leggo il contenuto del post dal modulo inviato
+       new_post = {
+           "Author": user['Email'], #usa l'email dell'utente come identificatore del post
+           "Content": content  #inserisce il contenuto del post
+       }
 
-    if request.method == 'POST': #Se la richiesta è POST, crea un nuovo post
-        author = user['FirstName'] + ' ' + user['LastName']  #Recupera il nome completo dell'autore
-        content = request.form['content']  #Contenuto del post inserito dall'utente
-        image_url = None  #Inizializza il percorso dell'immagine come vuoto
+       with open('./db/posts.json', 'r') as file:
+            posts = json.load(file)   #carico i post già esistenti nel file json
+        
+       posts.append(new_post)
 
-        if 'image' in request.files:  # Verifica se il campo immagine è stato inviato (vado a controllare se un'immagine è stata caricata)
-            image = request.files['image']
-            if '.' in image.filename and image.filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
-                # Salva l'immagine nella cartella specificata
-                os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Crea la cartella se non esiste
-                image_path = os.path.join(UPLOAD_FOLDER, image.filename)  # Percorso completo per salvare l'immagine
-                image.save(image_path)  # Salva il file
-                image_url = f'/static/images/{image.filename}'  # Salva il percorso dell'immagine
-
-        # Passo 6: Leggi i post esistenti dal file JSON
-        posts = load_json(posts.json)
-
-        # Passo 7: Aggiungi il nuovo post all'elenco
-        posts.append({'author': author, 'content': content, 'image_url': image_url})
-
-        # Passo 8: Salva i post aggiornati nel file JSON
-        save_json(POSTS_FILE, posts)
-
-        # Passo 9: Reindirizza alla home page
-        return redirect('/')
-
-    # Passo 10: Se la richiesta è GET, mostra il modulo per creare un post
-    return render_template('create_post.html')
-
+        
