@@ -1,0 +1,86 @@
+h2 {
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  font-size: 48px;
+  color: #E1306C; /* Colore simile al tema Instagram */
+}
+/* Reset di base */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+  height: 100vh; /* Altezza piena dello schermo */
+}
+
+/* Colonna generica */
+.column {
+  padding: 45px;
+}
+
+/* Colonna sinistra */
+.column.left {
+  flex: 1; /* Adatta questa colonna in modo flessibile */
+  background-color: #f0f0f0;
+  display: none; /* Nasconde la colonna sinistra di default */
+}
+
+/* Colonna centrale */
+.column.center {
+  flex: 3; /* Colonna principale più ampia */
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative; /* Aggiunto per abilitare il posizionamento assoluto delle icone */
+}
+
+/* Colonna destra */
+.column.right {
+  flex: 1;
+  background-color: #f9f9f9;
+  display: none; /* Nasconde la colonna destra di default */
+}
+
+/* Media query per schermi più grandi */
+@media (min-width: 768px) {
+  .column.left, .column.right {
+    display: block; /* Mostra le colonne laterali */
+  }
+}
+
+/* Bottone di logout */
+.logout-button {
+  margin-top: 20px;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #E1306C;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* Icona in alto a destra, leggermente spostata a sinistra e più in basso */
+.icon-top-right {
+  position: absolute;
+  top: 75px;    /* Abbassata un po' */
+  right: 150px;  /* Spostata più a sinistra */
+  font-size: 1.5rem; /* Dimensione dell'icona */
+  color: #007bff;    /* Colore dell'icona */
+  cursor: pointer;   /* Cambia il cursore al passaggio */
+}
+
+/* Aggiunta della posizione per la seconda icona */
+.icon-plus {
+  position: absolute;
+  top: 75px;
+  right: 70px; 
+  font-size: 1.5rem; 
+  color: #007bff;  
+  cursor: pointer;  
+}

@@ -1,7 +1,9 @@
 [
     {
-        "username": "Gabriele1234!",
-        "email": "vincentigabriele06@gmail.com",
-        "password": "scrypt:32768:8:1$v4s6sUFY9Cv087Sy$cad154c576aa90873165fc276c3068590cb13647ca53f51f50a1e36dd72ea418013e751b84a9e8bbf26e3e1ae883714ab454d117e437cc9457bf80804a1fb787"
+        "ID": 1,
+        "FirstName": "Alessio",
+        "LastName": "Lodi Rizzini",
+        "Email": "alessiolodirizzini@gmail.com",
+        "Password": "provapw123" 
     }
 ]
