@@ -101,7 +101,7 @@ def register():
 @app.route('/create_post', methods=['GET', 'POST'])
 def create_post():
     if 'user_email' not in session:
-        return redirect(url_for('login'))  #se l'utente non è loggato, lo redirigi alla pagina di login
+        return redirect(url_for('login')) #se l'utente non è loggato, lo redirigi alla pagina di login
 
     if request.method == 'POST':
         author = request.form['author']
