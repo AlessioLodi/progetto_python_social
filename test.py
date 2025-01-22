@@ -45,7 +45,7 @@ def index():
 #vado a prender gli utenti dal file json 'users'
 @app.route('/users', methods=['GET']) #accetta solo richieste di tipo GET
 def get_users(): #funzione eseguita quando un utente accede all'URL /users
-    with open('./db/users.json', 'r') as file: #apro il json in modalita di lettura ('r')
+    with open('./users.json', 'r') as file: #apro il json in modalita di lettura ('r')
         data = json.load(file) #leggo il contenuto del json e lo trasformo in una lista/dizionario, poi lo immagazzino nella var. data
         userList = [] #lista vuota per gli user 
     
@@ -65,7 +65,7 @@ def register():
 @app.route('/register/create_post', methods=['POST'])#quando apro la pagina login
 def add_user(): #funzione per aggiungere un nuovo user
     # Open user file
-    with open('./db/users.json', 'r') as file: #apro il file yser in modalità lettura
+    with open('./users.json', 'r') as file: #apro il file yser in modalità lettura
         data = json.load(file) #leggo il contenuto del json e lo trasformo in una lista/dizionario, poi lo immagazzino nella var. data
     
     # bisogna cercare l'Id dell'ultimo utente per mettere +1 a quello nuovo
