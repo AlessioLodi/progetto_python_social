@@ -31,7 +31,7 @@ class User:
 @app.route('/', methods=['GET'])
 def index():
     devName = 'Alessio Lodi Rizzini'
-    return render_template('home.html', dev_name=devName)
+    return render_template('register.html', dev_name=devName)
 
 # questo invece è un log DINAMICO, ovvero il nome cambierà ogni volta
 # @app.route('/<nome>', methods=['GET'])
