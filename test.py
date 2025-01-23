@@ -89,7 +89,7 @@ def add_user():  # funzione per aggiungere un nuovo user
     
     return redirect('/users')
 
-<<<<<<< HEAD
+#<<<<<<< HEAD
 @app.route('/login', methods=['GET'])
 def login():
     return render_template('login.html')
@@ -128,7 +128,7 @@ def create_posts(): #funzione per creare i post
        posts.append(new_post)
        
        
-=======
+#=======
 
 ### CREAZIONE ED EVENTUALE CANCELLAZIONE DEI POST
 
