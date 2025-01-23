@@ -114,7 +114,7 @@
       <!-- Prima icona (Account) -->
       <i class="fa-solid fa-user icon-top-right" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
       <!-- Seconda icona (Plus) -->
-      <i class="bi bi-plus-square icon-plus"></i>
+      <a href="./create_post.html"><i href="./create_post.html" class="bi bi-plus-square icon-plus"></i></a>
 
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -141,15 +141,6 @@
       </div>
       <br><br><br>
       <h3>Feed</h3>
-      <!--{% for post in posts %}
-        <div class="post" style="margin-bottom: 20px;">
-          <h5>{{ post.author }}</h5>
-          <p>{{ post.content }}</p>
-          {% if post.image_url %}
-            <img src="{{ post.image_url }}" alt="Image" style="width: 100%; max-width: 400px;">
-          {% endif %}
-        </div>
-      {% endfor %}-->
     </div>
   </div>
 </body>
