@@ -8,5 +8,15 @@
         "username": "alessio2006",
         "email": "alessiolodirizzini@gmail.com",
         "password": "12345678"
+    },
+    {
+        "username": "FrancoArmani13",
+        "email": "francoarmani@gmail.com",
+        "password": "franco25"
+    },
+    {
+        "username": "UtenteTest",
+        "email": "utentetest@gmail.com",
+        "password": "test123"
     }
 ]
