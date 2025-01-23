@@ -4,6 +4,27 @@
         "FirstName": "Alessio",
         "LastName": "Lodi Rizzini",
         "Email": "alessiolodirizzini@gmail.com",
-        "Password": "provapw123" 
+        "Password": "provapw123"
+    },
+    {
+        "ID": 2,
+        "FirstName": "alessio",
+        "LastName": "lodi",
+        "Email": "alessiolodirizzini@gmail.com",
+        "Password": "ciao123"
+    },
+    {
+        "ID": 3,
+        "FirstName": "alessio",
+        "LastName": "lodi",
+        "Email": "alessiolodirizzini@gmail.com",
+        "Password": "ciao123"
+    },
+    {
+        "ID": 4,
+        "FirstName": "alessio",
+        "LastName": "lodi",
+        "Email": "alessiolodirizzini@gmail.com",
+        "Password": "ciao123"
     }
 ]
