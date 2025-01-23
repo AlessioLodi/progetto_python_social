@@ -215,4 +215,4 @@ def logout():
 #avvio del server Flask
 if __name__ == "__main__":
     app.run(debug=True, port=5001)  # avvia il server con modalità debug, uso la porta 5001 invece della 5000 perchè la porta 5000 era dedicata ad app.py
->>>>>>> 0fb26d39968fa411570470eae63ba4930bdf0c16
+
