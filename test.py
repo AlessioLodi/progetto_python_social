@@ -89,46 +89,6 @@ def add_user():  # funzione per aggiungere un nuovo user
     
     return redirect('/users')
 
-#<<<<<<< HEAD
-@app.route('/login', methods=['GET'])
-def login():
-    return render_template('login.html')
-
-###CREAZIONE ED EVENTUALE CANCELLAZIONE DEI POST
-
-@app.route('/posts', methods=['GET', 'POST'])
-def create_posts(): #funzione per creare i post
-    user_email = request.cookies.get('user_email') #per ottenere la mail dell'utente loggato tramite i cookie del brawser
-    user = None #inizializzo la variabile user come vuota prima di cercare l'utente loggato.
-
-    with open('./users.json', 'r') as file:  #leggo il file json per verificare che l'utente sia loggato
-        users = json.load(file) #carico il file letto in users
-         
-        #per ogni elemento in users, assegna temporaneamente quel singolo elemento alla variabile u
-        for u in users: #cicla attraverso tutti gli utenti (u=variabile temporanea che rappresenta ogni elemento della lista users[la lista sarebbe users.json])
-            if u['Email'] == user_email: #controllo se l'email corrisponde all'utente loggato
-               user = u #salvo l'utente trovato
-               break #interrompo il ciclo una volta trovato l'utente
-               
-
-    if not user:
-       return redirect('/login') #se non c'è nessun utente loggato reindirizza al login
-    
-    #gestione della richiesta post (aggiungo un nuovo post)
-    if request.method == 'POST':
-       content = request.form['content'] #leggo il contenuto del post dal modulo inviato
-       new_post = {
-           "Author": user['Email'], #usa l'email dell'utente come identificatore del post
-           "Content": content  #inserisce il contenuto del post
-       }
-
-       with open('./posts.json', 'r') as file:
-            posts = json.load(file)   #carico i post già esistenti nel file json
-        
-       posts.append(new_post)
-       
-       
-#=======
 
 ### CREAZIONE ED EVENTUALE CANCELLAZIONE DEI POST
 
@@ -215,4 +175,3 @@ def logout():
 #avvio del server Flask
 if __name__ == "__main__":
     app.run(debug=True, port=5001)  # avvia il server con modalità debug, uso la porta 5001 invece della 5000 perchè la porta 5000 era dedicata ad app.py
-
