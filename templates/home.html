@@ -50,16 +50,15 @@
         }
 
         .post h5 i {
-            font-size: 1.2rem; /* Modifica la dimensione dell'icona */
-            margin-right: 8px; /* Aggiungi uno spazio tra l'icona e il nome */
-            color: #007bff; /* Cambia il colore dell'icona (opzionale) */
+            font-size: 1.2rem;
+            margin-right: 8px; 
+            color: #007bff; 
         }
 
         .post img {
-            display: block; /* Per garantire che l'immagine sia trattata come un blocco */
-            
-            max-width: 90%; /* Aumenta la larghezza massima al 90% */
-            height: auto; /* Mantiene il rapporto di aspetto originale */
+            display: block;
+            max-width: 90%; 
+            height: auto;
         }
     </style>
 </head>
@@ -77,7 +76,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">NOME ACCOUNT - Dettagli account</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">{{ user['username'] }} - Dettagli account</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">

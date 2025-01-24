@@ -8,5 +8,15 @@
         "author": "alessio2006",
         "content": "sono andato in montagna!",
         "image_url": "/static/images/montagna.jpg"
+    },
+    {
+        "author": "riccardo",
+        "content": "hi, i'm at school rn",
+        "image_url": "/static/images/img4.jpg"
+    },
+    {
+        "author": "riccardo",
+        "content": "hello",
+        "image_url": null
     }
 ]

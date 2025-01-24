@@ -90,7 +90,6 @@ def register():
 def create_post():
     user_email = request.cookies.get('user_email')
     user = None
-
     #verifica se l'utente è loggato
     if user_email and os.path.exists(USERS_FILE):
         users = load_json(USERS_FILE)
@@ -111,7 +110,7 @@ def create_post():
                 image_path = os.path.join(UPLOAD_FOLDER, image.filename)
                 image.save(image_path)
                 image_url = f'/static/images/{image.filename}'
-
+                
         posts = load_json(POSTS_FILE)
         posts.append({'author': user['username'], 'content': content, 'image_url': image_url})
         save_json(POSTS_FILE, posts)
