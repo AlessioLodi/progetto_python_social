@@ -8,7 +8,7 @@ app = Flask(__name__, template_folder=template_dir)
 
 UPLOAD_FOLDER = 'static/images'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-USERS_FILE = './users.json'  # Aggiornato per puntare alla directory principale
+USERS_FILE = './users.json' 
 POSTS_FILE = './posts.json'
 
 #funzione per caricare dati JSON

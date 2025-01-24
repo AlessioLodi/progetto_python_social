@@ -3,5 +3,10 @@
         "author": "gabri.vincentii",
         "content": "ciao sono al mare",
         "image_url": "/static/images/vacanza.jpeg"
+    },
+    {
+        "author": "alessio2006",
+        "content": "sono andato in montagna!",
+        "image_url": "/static/images/montagna.jpg"
     }
 ]

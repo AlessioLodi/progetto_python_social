@@ -48,6 +48,19 @@
             font-size: 38px;
             color: #262626; 
         }
+
+        .post h5 i {
+            font-size: 1.2rem; /* Modifica la dimensione dell'icona */
+            margin-right: 8px; /* Aggiungi uno spazio tra l'icona e il nome */
+            color: #007bff; /* Cambia il colore dell'icona (opzionale) */
+        }
+
+        .post img {
+            display: block; /* Per garantire che l'immagine sia trattata come un blocco */
+            
+            max-width: 90%; /* Aumenta la larghezza massima al 90% */
+            height: auto; /* Mantiene il rapporto di aspetto originale */
+        }
     </style>
 </head>
 <body>
@@ -84,16 +97,19 @@
             <!--if utente loggato, mostro il feed -->
             <div style="padding-top: 10px;">
                 <h1 class="feed-title">Feed</h1>
-            </div>
+            </div><br>
 
             {% for post in posts %}
-                <div class="post mb-4">
-                    <h5>{{ post.author }}</h5>
-                    <p>{{ post.content }}</p>
-                    {% if post.image_url %}
-                        <img src="{{ post.image_url }}" alt="Post Image">
-                    {% endif %}
+            <div class="post mb-4">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-person-circle"></i> <!-- Icona del profilo -->
+                    <h5 class="ms-2 mb-0">  {{ post.author }}</h5> <!-- Nome dell'autore -->
                 </div>
+                <p>Description: {{ post.content }}</p>
+                {% if post.image_url %}
+                    <img src="{{ post.image_url }}" alt="Post Image">
+                {% endif %}
+            </div><br>
             {% endfor %}
 
         {% else %}
